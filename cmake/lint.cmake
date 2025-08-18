@@ -9,7 +9,7 @@ endmacro()
 default(FORMAT_COMMAND clang-format)
 default(
     PATTERNS
-    source/*.cpp source/*.hpp
+    src/*.cpp src/*.hpp
     include/*.hpp
     test/*.cpp test/*.hpp
 )
@@ -23,6 +23,7 @@ if(FIX)
 endif()
 
 file(GLOB_RECURSE files ${PATTERNS})
+list(REMOVE_ITEM files "${CMAKE_SOURCE_DIR}/.gitignore")
 set(badly_formatted "")
 set(output "")
 string(LENGTH "${CMAKE_SOURCE_DIR}/" path_prefix_length)
