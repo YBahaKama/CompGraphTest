@@ -70,8 +70,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: List files
+      run: ls -l
+  
+    - name: List files
+      run: ls -l
+  
+
     - name: Configure
-      run: cmake --preset=ci-sanitize -S 
+      run: cmake --preset=ci-sanitize -S .
 
     - name: Build
       run: cmake --build build/sanitize -j 2
