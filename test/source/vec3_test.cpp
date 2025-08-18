@@ -1,4 +1,6 @@
 #include <cg/vec3.hpp>
+#include <gtest/gtest.h>
+
 
 TEST(Vec3Test, DefaultConstructor) {
 	cg::vec3 v;
