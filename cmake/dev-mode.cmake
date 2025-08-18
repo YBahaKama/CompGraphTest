@@ -10,7 +10,10 @@ add_custom_target(
     COMMAND executable_exe
     VERBATIM
 )
-add_dependencies(run-exe executable_exe)
+if(TARGET executable_exe)
+  add_dependencies(run-exe executable_exe)
+endif()
+
 
 option(BUILD_MCSS_DOCS "Build documentation using Doxygen and m.css" OFF)
 if(BUILD_MCSS_DOCS)
