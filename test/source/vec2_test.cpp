@@ -1,4 +1,5 @@
 #include <cg/vec2.hpp>
+#include <gtest/gtest.h>
 
 TEST(Vec2Test, DefaultConstructor) {
 	cg::Vec2 v;
