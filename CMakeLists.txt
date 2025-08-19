@@ -33,7 +33,6 @@ target_compile_options(ComputerGraphics PRIVATE
     $<$<CXX_COMPILER_ID:GNU>:-Wall -Wextra -pedantic>
     $<$<CXX_COMPILER_ID:Clang>:-Wall -Wextra -pedantic>
 )
-
 # ---- Install rules ----
 set(CMAKE_SKIP_INSTALL_RULES off)
 if(NOT CMAKE_SKIP_INSTALL_RULES)
@@ -71,23 +70,23 @@ add_subdirectory(examples)
 include(CMakePackageConfigHelpers)
 
 # Install library + headers
-install(TARGETS ComputerGraphics
-    EXPORT ComputerGraphicsTargets
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-    RUNTIME DESTINATION bin
-)
+# install(TARGETS ComputerGraphics
+#    EXPORT ComputerGraphicsTargets
+#   ARCHIVE DESTINATION lib
+#    LIBRARY DESTINATION lib
+#    RUNTIME DESTINATION bin
+#)
 
-install(DIRECTORY include/
-    DESTINATION include
-)
+#install(DIRECTORY include/
+#    DESTINATION include
+#)
 
 # Export targets file
-install(EXPORT ComputerGraphicsTargets
-    FILE ComputerGraphicsTargets.cmake
-    NAMESPACE ComputerGraphics::
-    DESTINATION lib/cmake/ComputerGraphics
-)
+#install(EXPORT ComputerGraphicsTargets
+#    FILE ComputerGraphicsTargets.cmake
+#    NAMESPACE ComputerGraphics::
+#    DESTINATION lib/cmake/ComputerGraphics
+#)
 
 # Create version file for package
 write_basic_package_version_file(
