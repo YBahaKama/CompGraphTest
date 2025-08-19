@@ -42,6 +42,10 @@ if(NOT CMAKE_SKIP_INSTALL_RULES)
 endif()
 
 # ---- Developer mode ----
+message(STATUS "Including docs.cmake and configuring documentation targets")
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/docs.cmake")
+  include(cmake/docs.cmake)
+endif()
 
 if(NOT executable_DEVELOPER_MODE)
   return()
@@ -52,11 +56,8 @@ elseif(NOT PROJECT_IS_TOP_LEVEL)
   )
 endif()
 
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/docs.cmake")
-  include(cmake/docs.cmake)
-endif()
-
 include(cmake/dev-mode.cmake)
+
 
 
 # Export symbols for DLL builds on Windows

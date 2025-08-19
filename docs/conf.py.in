@@ -1,4 +1,4 @@
-DOXYFILE = 'Doxyfile'
+import os DOXYFILE = os.path.join(os.path.dirname(file), 'Doxyfile')
 
 LINKS_NAVBAR1 = [
     (None, 'pages', [(None, 'about')]),
