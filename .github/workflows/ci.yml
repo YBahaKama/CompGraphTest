@@ -167,7 +167,7 @@ jobs:
         && sudo apt-get install doxygen -q -y
     
     - name: Move Doxygen config
-      run: mv build/docs-ci/docs/Doxyfile ./
+      run: mv ./build/docs-ci/docs/Doxyfile ./
 
     - name: Build docs
       run: |
