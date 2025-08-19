@@ -1,3 +1,8 @@
+if(TARGET docs)
+  return()
+endif()
+
+
 # ---- Dependencies ----
 
 set(extract_timestamps "")
