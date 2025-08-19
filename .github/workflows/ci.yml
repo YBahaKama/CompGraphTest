@@ -165,11 +165,17 @@ jobs:
     - name: Install Doxygen
       run: sudo apt-get update -q
         && sudo apt-get install doxygen -q -y
+    
+    - name: Move Doxygen config
+      run: mv build/docs-ci/docs/Doxyfile ./
 
     - name: Build docs
       run: |
         cmake -S . -B build/docs-ci
         cmake --build build/docs-ci --target docs
+
+    - name: Clean moved doxyfile
+      run: rm Doxyfile
 
     - name: Deploy docs
       uses: peaceiris/actions-gh-pages@v4
