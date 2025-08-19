@@ -171,6 +171,7 @@ jobs:
         cmake -S . -B build/docs-ci
         mv ./build/docs-ci/docs/Doxyfile ./
         cmake --build build/docs-ci --target docs
+        cmake --build build/docs-ci --target docs
 
     - name: Clean moved doxyfile
       run: rm Doxyfile
