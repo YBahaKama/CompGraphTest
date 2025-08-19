@@ -3,26 +3,26 @@
 # To create a new Doxyfile containing all available options, call `doxygen -g`
 
 # Get Project name and version from CMake
-PROJECT_NAME = "@PROJECT_NAME@"
-PROJECT_NUMBER = "@PROJECT_VERSION@"
+PROJECT_NAME = "ComputerGraphics"
+PROJECT_NUMBER = "0.1.0"
 
 # Add sources
-INPUT = "@PROJECT_SOURCE_DIR@/README.md" "@PROJECT_SOURCE_DIR@/include" "@PROJECT_SOURCE_DIR@/src" "@PROJECT_SOURCE_DIR@/docs/pages"
+INPUT = "D:/source/repos/ComputerGraphics - Copy/ComputerGraphics/README.md" "D:/source/repos/ComputerGraphics - Copy/ComputerGraphics/include" "D:/source/repos/ComputerGraphics - Copy/ComputerGraphics/src" "D:/source/repos/ComputerGraphics - Copy/ComputerGraphics/docs/pages"
 EXTRACT_ALL = YES
 RECURSIVE = YES
-OUTPUT_DIRECTORY = "@DOXYGEN_OUTPUT_DIRECTORY@"
+OUTPUT_DIRECTORY = "D:/source/repos/ComputerGraphics - Copy/ComputerGraphics/build/docs-ci/docs"
 
 # Use the README as a main page
-USE_MDFILE_AS_MAINPAGE = "@PROJECT_SOURCE_DIR@/README.md"
+USE_MDFILE_AS_MAINPAGE = "D:/source/repos/ComputerGraphics - Copy/ComputerGraphics/README.md"
 
 # set relative include paths
 FULL_PATH_NAMES = YES
-STRIP_FROM_PATH = "@PROJECT_SOURCE_DIR@/include" "@PROJECT_SOURCE_DIR@"
+STRIP_FROM_PATH = "D:/source/repos/ComputerGraphics - Copy/ComputerGraphics/include" "D:/source/repos/ComputerGraphics - Copy/ComputerGraphics"
 STRIP_FROM_INC_PATH =
 
 # We use m.css to generate the html documentation, so we only need XML output
 GENERATE_XML = YES
-GENERATE_HTML = YES
+GENERATE_HTML = NO
 GENERATE_LATEX = NO
 XML_PROGRAMLISTING = NO
 CREATE_SUBDIRS = NO
