@@ -35,7 +35,7 @@ target_compile_options(ComputerGraphics PRIVATE
 )
 
 # ---- Install rules ----
-set(CMAKE_SKIP_INSTALL_RULES on)
+set(CMAKE_SKIP_INSTALL_RULES off)
 if(NOT CMAKE_SKIP_INSTALL_RULES)
   include(cmake/install-rules.cmake)
 endif()
