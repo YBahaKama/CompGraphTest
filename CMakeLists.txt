@@ -52,7 +52,12 @@ elseif(NOT PROJECT_IS_TOP_LEVEL)
   )
 endif()
 
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/docs.cmake")
+  include(cmake/docs.cmake)
+endif()
+
 include(cmake/dev-mode.cmake)
+
 
 # Export symbols for DLL builds on Windows
 if (BUILD_SHARED_LIBS)
