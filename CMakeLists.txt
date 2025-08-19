@@ -11,6 +11,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
+include(cmake/add_library.cmake)
+
 
 # Toggle between static or shared
 option(BUILD_SHARED_LIBS "Build ComputerGraphics as a shared library (DLL)" OFF)
@@ -68,25 +70,6 @@ add_subdirectory(examples)
 # -------------------------
 
 include(CMakePackageConfigHelpers)
-
-# Install library + headers
-# install(TARGETS ComputerGraphics
-#    EXPORT ComputerGraphicsTargets
-#   ARCHIVE DESTINATION lib
-#    LIBRARY DESTINATION lib
-#    RUNTIME DESTINATION bin
-#)
-
-#install(DIRECTORY include/
-#    DESTINATION include
-#)
-
-# Export targets file
-#install(EXPORT ComputerGraphicsTargets
-#    FILE ComputerGraphicsTargets.cmake
-#    NAMESPACE ComputerGraphics::
-#    DESTINATION lib/cmake/ComputerGraphics
-#)
 
 # Create version file for package
 write_basic_package_version_file(
