@@ -7,7 +7,9 @@ set(
     lcov -c -q
     -o "${PROJECT_BINARY_DIR}/coverage.info"
     -d "${PROJECT_BINARY_DIR}"
-    --include "${PROJECT_SOURCE_DIR}/*"
+    --include "${PROJECT_SOURCE_DIR}/src/*"
+    --include "${PROJECT_SOURCE_DIR}/include/*"
+    --ignore-errors mismatch,gcov
     CACHE STRING
     "; separated command to generate a trace for the 'coverage' target"
 )
