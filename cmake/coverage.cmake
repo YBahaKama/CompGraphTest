@@ -44,6 +44,7 @@ add_custom_target(
     coverage
     # Run the commands in the correct order: trace, filter, then html.
     COMMAND ${COVERAGE_TRACE_COMMAND}
+    COMMAND ${COVERAGE_FILTER_COMMAND}
     COMMAND ${COVERAGE_HTML_COMMAND}
     COMMENT "Generating coverage report"
     VERBATIM

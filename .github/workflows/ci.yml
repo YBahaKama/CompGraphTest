@@ -59,8 +59,8 @@ jobs:
     - name: Process coverage info
       run: |
         cmake --build build/coverage -t coverage || true
-        lcov --remove ./build/coverage/_deps -o build/coverage/coverage.cleaned.info --ignore-errors empty
-        genhtml build/coverage/coverage.cleaned.info -o build/coverage/report
+        # lcov --remove ./build/coverage/_deps -o build/coverage/coverage.cleaned.info --ignore-errors empty
+        # genhtml build/coverage/coverage.cleaned.info -o build/coverage/report
 
     - name: Submit to codecov.io
       uses: codecov/codecov-action@v4
