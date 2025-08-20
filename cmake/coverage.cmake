@@ -6,7 +6,7 @@ set(
     lcov -c -q
     -o "${PROJECT_BINARY_DIR}/coverage.info.base"
     -d "${PROJECT_BINARY_DIR}"
-    --ignore-errors mismatch,gcov
+    --ignore-errors mismatch,gcov,unused
     CACHE STRING
     "Step 1: Generate a base trace for the 'coverage' target"
 )
@@ -21,7 +21,7 @@ set(
     "*/_deps/*"
     "/usr/include/*"
     -o "${PROJECT_BINARY_DIR}/coverage.info"
-    # MODIFIED: Add a flag to ignore errors about unused exclude patterns.
+    # MODIFIED: Add 'unused' to the list of ignored errors.
     --ignore-errors unused
     CACHE STRING
     "Step 2: Filter the trace for the 'coverage' target"
