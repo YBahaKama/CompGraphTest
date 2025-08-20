@@ -45,11 +45,8 @@ jobs:
         rm ./build/docs-ci/docs/xml/Doxyfile.xml
         python build/docs-ci/mcss/documentation/doxygen.py --no-doxygen build/docs-ci/docs/conf.py
 
-    - name: Clean moved doxyfile
-      run: rm Doxyfile
-
     - name: Deploy docs
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: build/docs/html
+        publish_dir: build/docs-ci/docs/html
