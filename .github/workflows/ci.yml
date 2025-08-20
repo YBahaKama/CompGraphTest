@@ -51,6 +51,11 @@ jobs:
       working-directory: build/coverage
       run: ctest --output-on-failure --no-tests=error -j 2
 
+    - name: pwd and tree
+      run: |
+           pwd
+           tree 
+           
     - name: Process coverage info
       run: |
         cmake --build build/coverage -t coverage || true
