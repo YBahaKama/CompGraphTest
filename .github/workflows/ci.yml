@@ -11,9 +11,9 @@ on:
 
 jobs:
 
+
   docs:
     # Deploy docs only when builds succeed
-    needs: [sanitize, test]
 
     runs-on: ubuntu-24.04
 
