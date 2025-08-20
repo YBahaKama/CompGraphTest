@@ -59,8 +59,6 @@ jobs:
     - name: Process coverage info
       run: |
         cmake --build build/coverage -t coverage || true
-        # lcov --remove ./build/coverage/_deps -o build/coverage/coverage.cleaned.info --ignore-errors empty
-        # genhtml build/coverage/coverage.cleaned.info -o build/coverage/report
 
     - name: Submit to codecov.io
       uses: codecov/codecov-action@v4
@@ -68,120 +66,120 @@ jobs:
         file: build/coverage/coverage.info
         token: ${{ secrets.CODECOV_TOKEN }}
 
-  # sanitize:
-  #   needs: [lint]
+  sanitize:
+    needs: [lint]
 
-  #   runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04
 
-  #   env: { CXX: clang++-18 }
+    env: { CXX: clang++-18 }
 
-  #   steps:
-  #   - uses: actions/checkout@v4
+    steps:
+    - uses: actions/checkout@v4
 
-  #   - name: List files
-  #     run: ls -l
+    - name: List files
+      run: ls -l
 
-  #   - name: Print working directory
-  #     run: pwd
+    - name: Print working directory
+      run: pwd
   
 
-  #   - name: Configure
-  #     run: cmake --preset=ci-sanitize -S .
+    - name: Configure
+      run: cmake --preset=ci-sanitize -S .
 
-  #   - name: Build
-  #     run: cmake --build build/sanitize -j 2
+    - name: Build
+      run: cmake --build build/sanitize -j 2
 
-  #   - name: Test
-  #     working-directory: build/sanitize
-  #     env:
-  #       ASAN_OPTIONS: "strict_string_checks=1:\
-  #         detect_stack_use_after_return=1:\
-  #         check_initialization_order=1:\
-  #         strict_init_order=1:\
-  #         detect_leaks=1:\
-  #         halt_on_error=1"
-  #       UBSAN_OPTIONS: "print_stacktrace=1:\
-  #         halt_on_error=1"
-  #     run: ctest --output-on-failure --no-tests=error -j 2
+    - name: Test
+      working-directory: build/sanitize
+      env:
+        ASAN_OPTIONS: "strict_string_checks=1:\
+          detect_stack_use_after_return=1:\
+          check_initialization_order=1:\
+          strict_init_order=1:\
+          detect_leaks=1:\
+          halt_on_error=1"
+        UBSAN_OPTIONS: "print_stacktrace=1:\
+          halt_on_error=1"
+      run: ctest --output-on-failure --no-tests=error -j 2
 
-  # test:
-  #   needs: [lint]
+  test:
+    needs: [lint]
 
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-24.04] #macos-14, , windows-2022
+    strategy:
+      matrix:
+        os: [ubuntu-24.04] #macos-14, , windows-2022
 
-  #   runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
-  #   steps:
-  #   - uses: actions/checkout@v4
+    steps:
+    - uses: actions/checkout@v4
 
-  #   - name: Install static analyzers
-  #     if: matrix.os == 'ubuntu-24.04'
-  #     run: >-
-  #       sudo apt-get install clang-tidy-18 cppcheck -y -q
+    - name: Install static analyzers
+      if: matrix.os == 'ubuntu-24.04'
+      run: >-
+        sudo apt-get install clang-tidy-18 cppcheck -y -q
 
-  #       sudo update-alternatives --install
-  #       /usr/bin/clang-tidy clang-tidy
-  #       /usr/bin/clang-tidy-18 180
+        sudo update-alternatives --install
+        /usr/bin/clang-tidy clang-tidy
+        /usr/bin/clang-tidy-18 180
 
-  #   - name: Setup MultiToolTask
-  #     if: matrix.os == 'windows-2022'
-  #     run: |
-  #       Add-Content "$env:GITHUB_ENV" 'UseMultiToolTask=true'
-  #       Add-Content "$env:GITHUB_ENV" 'EnforceProcessCountAcrossBuilds=true'
+    - name: Setup MultiToolTask
+      if: matrix.os == 'windows-2022'
+      run: |
+        Add-Content "$env:GITHUB_ENV" 'UseMultiToolTask=true'
+        Add-Content "$env:GITHUB_ENV" 'EnforceProcessCountAcrossBuilds=true'
 
-  #   - name: Configure
-  #     shell: pwsh
-  #     run: cmake "--preset=ci-$("${{ matrix.os }}".split("-")[0])"
+    - name: Configure
+      shell: pwsh
+      run: cmake "--preset=ci-$("${{ matrix.os }}".split("-")[0])"
 
-  #   - name: Build
-  #     run: cmake --build build --config Release -j 2
+    - name: Build
+      run: cmake --build build --config Release -j 2
 
-  #   - name: Install
-  #     run: cmake --install build --config Release --prefix prefix
+    - name: Install
+      run: cmake --install build --config Release --prefix prefix
 
-  #   - name: Test
-  #     working-directory: build
-  #     run: ctest --output-on-failure --no-tests=error -C Release -j 2
+    - name: Test
+      working-directory: build
+      run: ctest --output-on-failure --no-tests=error -C Release -j 2
     
 
-  # docs:
-  #   Deploy docs only when builds succeed
-  #   needs: [sanitize, test]
-  #   runs-on: ubuntu-24.04
+  docs:
+    #Deploy docs only when builds succeed
+    needs: [sanitize, test]
+    runs-on: ubuntu-24.04
 
-  #   if: github.ref == 'refs/heads/master'
-  #     && github.event_name == 'push'
-  #     && github.repository_owner == 'YBahaKama'
+    if: github.ref == 'refs/heads/master'
+      && github.event_name == 'push'
+      && github.repository_owner == 'YBahaKama'
 
-  #   permissions:
-  #     contents: write
+    permissions:
+      contents: write
 
-  #   steps:
-  #   - uses: actions/checkout@v4
+    steps:
+    - uses: actions/checkout@v4
 
-  #   - uses: actions/setup-python@v5
-  #     with: { python-version: "3.12" }
+    - uses: actions/setup-python@v5
+      with: { python-version: "3.12" }
 
-  #   - name: Install m.css dependencies
-  #     run: pip3 install jinja2 Pygments
+    - name: Install m.css dependencies
+      run: pip3 install jinja2 Pygments
 
-  #   - name: Install Doxygen
-  #     run: sudo apt-get update -q
-  #       && sudo apt-get install doxygen -q -y
+    - name: Install Doxygen
+      run: sudo apt-get update -q
+        && sudo apt-get install doxygen -q -y
     
-  #   - name: Build docs
-  #     run: |
-  #       cmake -S . -B build/docs-ci
-  #       mv ./build/docs-ci/docs/Doxyfile ./
-  #       cmake --build build/docs-ci --target docs  
-  #       rm ./build/docs-ci/docs/xml/Doxyfile.xml
-  #       python build/docs-ci/mcss/documentation/doxygen.py --no-doxygen build/docs-ci/docs/conf.py
+    - name: Build docs
+      run: |
+        cmake -S . -B build/docs-ci
+        mv ./build/docs-ci/docs/Doxyfile ./
+        cmake --build build/docs-ci --target docs  
+        rm ./build/docs-ci/docs/xml/Doxyfile.xml
+        python build/docs-ci/mcss/documentation/doxygen.py --no-doxygen build/docs-ci/docs/conf.py
 
-  #   - name: Deploy docs
-  #     uses: peaceiris/actions-gh-pages@v4
-  #     with:
-  #       github_token: ${{ secrets.GITHUB_TOKEN }}
-  #       publish_dir: build/docs-ci/docs/html
+    - name: Deploy docs
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: build/docs-ci/docs/html
 
