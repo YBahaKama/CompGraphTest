@@ -1,19 +1,17 @@
 # ---- Variables ----
 
-# We use variables separate from what CTest uses, because those have
-# customization issues
+# Step 1: Capture coverage for the entire project.
 set(
     COVERAGE_TRACE_COMMAND
     lcov -c -q
-    -o "${PROJECT_BINARY_DIR}/coverage.info"
+    -o "${PROJECT_BINARY_DIR}/coverage.info.base"
     -d "${PROJECT_BINARY_DIR}"
-    --include "${PROJECT_SOURCE_DIR}/src/*"
-    --include "${PROJECT_SOURCE_DIR}/include/*"
     --ignore-errors mismatch,gcov
     CACHE STRING
-    "; separated command to generate a trace for the 'coverage' target"
+    "Step 1: Generate a base trace for the 'coverage' target"
 )
 
+# Step 2: Filter the base trace to remove unwanted files.
 set(
     COVERAGE_FILTER_COMMAND
     lcov -q
@@ -23,11 +21,11 @@ set(
     "*/_deps/*"
     "/usr/include/*"
     -o "${PROJECT_BINARY_DIR}/coverage.info"
-    --ignore-errors unused
     CACHE STRING
-    "; separated command to filter the trace for the 'coverage' target"
+    "Step 2: Filter the trace for the 'coverage' target"
 )
 
+# Step 3: Generate the final HTML report from the filtered data.
 set(
     COVERAGE_HTML_COMMAND
     genhtml --legend -f -q
@@ -35,14 +33,16 @@ set(
     -p "${PROJECT_SOURCE_DIR}"
     -o "${PROJECT_BINARY_DIR}/coverage_html"
     CACHE STRING
-    "; separated command to generate an HTML report for the 'coverage' target"
+    "Step 3: Generate an HTML report for the 'coverage' target"
 )
 
 # ---- Coverage target ----
 
 add_custom_target(
     coverage
+    # Run the commands in the correct order: trace, filter, then html.
     COMMAND ${COVERAGE_TRACE_COMMAND}
+    COMMAND ${COVERAGE_FILTER_COMMAND}
     COMMAND ${COVERAGE_HTML_COMMAND}
     COMMENT "Generating coverage report"
     VERBATIM
