@@ -18,7 +18,7 @@ set(
     --remove "${PROJECT_BINARY_DIR}/coverage.info.base"
     # Exclude test code, dependencies, and system headers.
     "*/test/*"
-    "*/_deps/*"
+    "*/include/gtest*"
     "/usr/include/*"
     -o "${PROJECT_BINARY_DIR}/coverage.info"
     # MODIFIED: Add 'unused' to the list of ignored errors.
