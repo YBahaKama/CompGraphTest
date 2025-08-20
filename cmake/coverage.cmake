@@ -6,7 +6,7 @@ set(
     lcov -c -q
     -o "${PROJECT_BINARY_DIR}/coverage.info.base"
     -d "${PROJECT_BINARY_DIR}"
-    --remove "*/test/*" "*/include/gtest*" "/usr/include/*"
+    --remove "*/test/*" "*/include&*" "/usr/include/*"
     --ignore-errors mismatch,gcov,unused
     CACHE STRING
     "Step 1: Generate a base trace for the 'coverage' target"
@@ -19,7 +19,7 @@ set(
     --remove "${PROJECT_BINARY_DIR}/coverage.info.base"
     # Exclude test code, dependencies, and system headers.
     "*/test/*"
-    "*/include/gtest*"
+    "*/include/*"
     "/usr/include/*"
     -o "${PROJECT_BINARY_DIR}/coverage.info"
     # MODIFIED: Add 'unused' to the list of ignored errors.
