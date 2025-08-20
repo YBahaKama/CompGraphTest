@@ -28,7 +28,3 @@ else:
         # last resort: assume a Doxyfile next to conf.py even if it doesn't exist yet
         DOXYFILE = os.path.normpath(os.path.join(_here, "Doxyfile"))
 
-LINKS_NAVBAR1 = [
-    (None, 'pages', [(None, 'about')]),
-    (None, 'namespaces', []),
-]
