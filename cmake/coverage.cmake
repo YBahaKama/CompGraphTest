@@ -15,6 +15,19 @@ set(
 )
 
 set(
+    COVERAGE_FILTER_COMMAND
+    lcov -q
+    --remove "${PROJECT_BINARY_DIR}/coverage.info.base"
+    # Exclude test code, dependencies, and system headers.
+    "*/test/*"
+    "*/_deps/*"
+    "/usr/include/*"
+    -o "${PROJECT_BINARY_DIR}/coverage.info"
+    CACHE STRING
+    "; separated command to filter the trace for the 'coverage' target"
+)
+
+set(
     COVERAGE_HTML_COMMAND
     genhtml --legend -f -q
     "${PROJECT_BINARY_DIR}/coverage.info"
