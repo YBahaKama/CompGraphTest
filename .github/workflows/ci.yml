@@ -170,8 +170,10 @@ jobs:
       run: |
         cmake -S . -B build/docs-ci
         mv ./build/docs-ci/docs/Doxyfile ./
+        pwd
+        tree
         cmake --build build/docs-ci --target docs
-        cmake --build build/docs-ci --target docs
+        python mcss/documentation/doxygen.py build/docs-ci/docs/conf.py
 
     - name: Clean moved doxyfile
       run: rm Doxyfile
