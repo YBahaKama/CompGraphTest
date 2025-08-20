@@ -21,6 +21,8 @@ set(
     "*/_deps/*"
     "/usr/include/*"
     -o "${PROJECT_BINARY_DIR}/coverage.info"
+    # MODIFIED: Add a flag to ignore errors about unused exclude patterns.
+    --ignore-errors unused
     CACHE STRING
     "Step 2: Filter the trace for the 'coverage' target"
 )
