@@ -6,6 +6,11 @@
 PROJECT_NAME = "@PROJECT_NAME@"
 PROJECT_NUMBER = "@PROJECT_VERSION@"
 
+FILE_PATTERNS = *.h \
+                *.hpp \
+                *.cpp \
+                *.dox
+
 # Add sources
 INPUT = "@PROJECT_SOURCE_DIR@/README.md" "@PROJECT_SOURCE_DIR@/include" "@PROJECT_SOURCE_DIR@/src" "@PROJECT_SOURCE_DIR@/docs/pages"
 EXTRACT_ALL = YES
@@ -14,6 +19,12 @@ OUTPUT_DIRECTORY = "@DOXYGEN_OUTPUT_DIRECTORY@"
 
 # Use the README as a main page
 USE_MDFILE_AS_MAINPAGE = "@PROJECT_SOURCE_DIR@/README.md"
+
+EXCLUDE = "@PROJECT_SOURCE_DIR@/docs"
+EXCLUDE +=  "@PROJECT_SOURCE_DIR@/include/gtest"
+EXCLUDE_PATTERNS = */Doxyfile */Doxyfile.* @PROJECT_SOURCE_DIR@/include/gtest/*
+
+
 
 # set relative include paths
 FULL_PATH_NAMES = YES

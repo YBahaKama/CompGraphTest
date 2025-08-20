@@ -1,4 +1,32 @@
-import os DOXYFILE = os.path.join(os.path.dirname(file), 'Doxyfile')
+import os
+
+# Path to this file's directory
+_here = os.path.abspath(os.path.dirname(__file__))
+
+# If CMake substituted DOXYGEN_OUTPUT_DIRECTORY, use that (it should be an absolute build path).
+# When configure_file runs, @DOXYGEN_OUTPUT_DIRECTORY@ will be replaced; if it wasn't,
+# this will just be a literal string and the os.path.isdir check will fail and we'll fall back.
+_dox_out = r"@DOXYGEN_OUTPUT_DIRECTORY@"
+
+if _dox_out and os.path.isdir(_dox_out):
+    # prefer the explicit build output dir if present
+    DOXYFILE = os.path.normpath(os.path.join(_dox_out, "Doxyfile"))
+else:
+    # fallback: try several likely relative locations and pick the first that exists
+    _candidates = [
+        os.path.join(_here, "Doxyfile"),
+        os.path.join(_here, "..", "Doxyfile"),
+        os.path.join(_here, "..", "..", "Doxyfile"),
+        os.path.join(_here, "build", "docs", "Doxyfile"),
+    ]
+    for _c in _candidates:
+        _c_norm = os.path.normpath(_c)
+        if os.path.exists(_c_norm):
+            DOXYFILE = _c_norm
+            break
+    else:
+        # last resort: assume a Doxyfile next to conf.py even if it doesn't exist yet
+        DOXYFILE = os.path.normpath(os.path.join(_here, "Doxyfile"))
 
 LINKS_NAVBAR1 = [
     (None, 'pages', [(None, 'about')]),
