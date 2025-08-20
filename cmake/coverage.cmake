@@ -23,6 +23,7 @@ set(
     "*/_deps/*"
     "/usr/include/*"
     -o "${PROJECT_BINARY_DIR}/coverage.info"
+    --ignore-errors unused
     CACHE STRING
     "; separated command to filter the trace for the 'coverage' target"
 )
